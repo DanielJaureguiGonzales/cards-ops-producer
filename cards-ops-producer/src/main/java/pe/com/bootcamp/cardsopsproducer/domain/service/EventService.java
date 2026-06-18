@@ -1,6 +1,7 @@
 package pe.com.bootcamp.cardsopsproducer.domain.service;
 
 import io.reactivex.rxjava3.core.Single;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pe.com.bootcamp.cardsopsproducer.api.dto.CardReplacementRequestDto;
 import pe.com.bootcamp.cardsopsproducer.domain.mapper.EventMapper;
@@ -17,12 +18,13 @@ public class EventService {
 
     private final String topic;
 
-    public EventService(AttemptPolicy policy, EventMapper mapper, EventPublisher<Object> publisher, String topic) {
+    public EventService(AttemptPolicy policy, EventMapper mapper, EventPublisher<Object> publisher,
+                        @Value("${kafka.topic}") String topicString ) {
 
         this.policy = policy;
         this.mapper = mapper;
         this.publisher = publisher;
-        this.topic = topic;
+        this.topic = topicString;
     }
 
     public Single<String> process(CardReplacementRequestDto dto) {
