@@ -63,7 +63,7 @@ services:
       retries: 20
 
   card-ops-producer:
-    build: src/main/java
+    build: .
     image: danklp123/card-ops-producer:1.0
     depends_on:
       kafka: { condition: service_healthy }
