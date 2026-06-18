@@ -12,32 +12,20 @@ public class EventMapper {
 
     public CardReplacementEvent toEvent(CardReplacementRequestDto dto, int attemptNumber){
 
+        // Ajusta exactamente los nombres/tipos a tu AVSC
         return CardReplacementEvent.newBuilder()
-
                 .setEventId(UUID.randomUUID().toString())
-
                 .setRequestId(dto.getRequestId())
-
                 .setCustomerId(dto.getCustomerId())
-
                 .setCardPANMasked(dto.getCardPANMasked())
-
                 .setReasonCode(dto.getReasonCode())
-
                 .setPriority(dto.getPriority())
-
                 .setBranchCode(dto.getBranchCode())
-
                 .setDeliveryAddress(dto.getDeliveryAddress())
-
-                .setRequestedAt(dto.getRequestedAt()) // 👈 clave
-
+                .setRequestedAt(dto.getRequestedAt())  // ahora es Instant directo
                 .setAttemptNumber(attemptNumber)
-
                 .setCorrelationId(dto.getCorrelationId())
-
                 .setStatus(dto.getStatus())
-
                 .build();
 
     }
