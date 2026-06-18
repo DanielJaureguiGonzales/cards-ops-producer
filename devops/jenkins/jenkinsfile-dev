@@ -40,7 +40,7 @@ pipeline {
                     //  Crea el primer nivel: /dispatch-consumer
                     checkout([$class: 'GitSCM',
                         branches: [[name: '*/develop']],
-                        userRemoteConfigs: [[url: 'https://github.com/verdugox/dispatch-consumer.git']]
+                        userRemoteConfigs: [[url: 'https://github.com/DanielJaureguiGonzales/dispatch-consumer.git']]
                     ])
                 }
             }
@@ -48,7 +48,7 @@ pipeline {
 
         stage('Start Docker Compose') {
             steps {
-                dir('card-ops-producer') { //  docker-compose.yml está aquí
+                dir('cards-ops-producer') { //  docker-compose.yml está aquí
                     script {
                         echo " Limpiando entorno Docker previo..."
                         bat """
@@ -83,7 +83,7 @@ pipeline {
 
         stage('Maven Build & Quality') {
             steps {
-                dir('card-ops-producer') {
+                dir('cards-ops-producer') {
                     echo " Compilando código con Maven..."
                     bat """
                         "${MAVEN_HOME}\\bin\\mvn" clean verify ^
@@ -97,7 +97,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo " Ejecutando análisis estático con SonarQube..."
-                dir('card-ops-producer') {
+                dir('cards-ops-producer') {
                     withSonarQubeEnv("${SONARQUBE}") {
                         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                             bat """
@@ -120,7 +120,7 @@ pipeline {
 
         stage('Docker Build & Push') {
             steps {
-                dir('card-ops-producer') {
+                dir('cards-ops-producer') {
                     echo " Construyendo imagen Docker local..."
                     bat "docker build -t %DOCKER_IMAGE% ."
                 }
