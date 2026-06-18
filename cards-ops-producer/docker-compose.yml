@@ -63,7 +63,7 @@ services:
       retries: 20
 
   card-ops-producer:
-    build: .
+    build: src/main/java
     image: danklp123/card-ops-producer:1.0
     depends_on:
       kafka: { condition: service_healthy }
@@ -96,7 +96,7 @@ services:
 
   dispatch-consumer:
     build:
-      context: ../../../../../dispatch-consumer/dispatch-consumer  #  relativo al docker-compose.yml
+      context: ../../dispatch-consumer/dispatch-consumer  #  relativo al docker-compose.yml
       dockerfile: Dockerfile
     image: danklp123/dispatch-consumer:1.0
     depends_on:
