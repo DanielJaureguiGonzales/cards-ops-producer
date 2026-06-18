@@ -10,7 +10,7 @@ RUN mvn -q -e -DskipTests package
 # ---------- Runtime ---------- 
 FROM eclipse-temurin:17-jre 
 WORKDIR /opt/app 
-COPY --from=build /app/target/card-ops-producer-*.jar app.jar 
+COPY --from=build /app/target/cards-ops-producer-*.jar app.jar
  
 # Puedes pasar flags aquí si quieres (GC logs, heap, etc.) 
 ENV JAVA_OPTS="" 
