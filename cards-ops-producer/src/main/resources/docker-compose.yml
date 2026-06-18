@@ -64,7 +64,7 @@ services:
 
   card-ops-producer:
     build: .
-    image: verdugox/card-ops-producer:1.0
+    image: danklp123/card-ops-producer:1.0
     depends_on:
       kafka: { condition: service_healthy }
       schema-registry: { condition: service_healthy }
@@ -98,7 +98,7 @@ services:
     build:
       context: ../../dispatch-consumer/dispatch-consumer  #  relativo al docker-compose.yml
       dockerfile: Dockerfile
-    image: verdugox/dispatch-consumer:1.0
+    image: danklp123/dispatch-consumer:1.0
     depends_on:
       kafka: { condition: service_healthy }
       schema-registry: { condition: service_healthy }
